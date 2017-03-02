@@ -1,12 +1,13 @@
 #include <EEPROM.h>
 #include <ESP8266WiFi.h>
+#include <SoftwareSerial.h>
 #include "Timer.h"
 #include "dht.h"
 
-
+SoftwareSerial swSer(14, 12, false, 256);
 Timer timer;
 
-#define DHT_PIN 3
+#define DHT_PIN 0
 #define READ_CYCLE 1000
 
 dht DHT;
@@ -21,12 +22,13 @@ struct Measurement {
 void setup() {
   EEPROM.begin(512);
   initializeSerial();
+  initializePMS();
   readContext();
-
-  //timer.every(READ_CYCLE, readAndSend);
+  initializeSensor();
 }
 
 void loop() {
-  while (Serial.available() > 0) readSerial();
+  serialLoop();
+  pmsLoop();
   timer.update();
 }

@@ -1,3 +1,8 @@
+void initializeSensor() {
+  pinMode(DHT_PIN, INPUT);
+  timer.every(READ_CYCLE, readAndSend);
+}
+
 Measurement readTemp() {
   int chk = DHT.read11(DHT_PIN);
   Measurement values = {0.0, 0.0, 0.0};
@@ -5,7 +10,11 @@ Measurement readTemp() {
     values.temp = DHT.temperature;
     values.hum = DHT.humidity;
     values.dew = dewPointFast(values.temp, values.hum);
-  }  
+  }
+  else
+  {
+    Serial.println(chk);
+  }
   return values;
 }
 

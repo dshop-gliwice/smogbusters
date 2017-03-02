@@ -7,6 +7,10 @@ void initializeSerial() {
 }
 
 
+void serialLoop() {
+  while (Serial.available() > 0) readSerial();
+}
+
 void readSerial() {
   char inChar = (char)Serial.read();
   if (inChar == '\n') {
