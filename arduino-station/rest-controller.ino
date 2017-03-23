@@ -8,39 +8,20 @@ const char* ssid = "set_me";
 const char* password = ""; 
 const char* gatewayUrl = "http://172.20.10.2:3000/data";
 
-struct MeasurementId {
-    char uuid[20];
-    char firmware [10];
-    char sensors [10];      
-};
-
-struct MeasurementData {
-    float temp;
-    float humidity;
-    float preassure;
-    float pm25;
-    float pm10;  
-};
-struct Measurement {
-    char version [5];
-    struct MeasurementId id;
-    struct MeasurementData data;
-};
-
 void initClient() {
-  Serial.begin(115200);
-  Serial.print("Connecting to ");
-  Serial.println(ssid);
-  Serial.flush();
-  
-  WiFi.mode(WIFI_STA);
-  WiFi.begin(ssid, password);
-  
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(250);
-    Serial.print(".");
-  }  
-  Serial.println();
+    Serial.begin(115200);
+    Serial.print("Connecting to ");
+    Serial.println(ssid);
+    Serial.flush();
+    
+    WiFi.mode(WIFI_STA);
+    WiFi.begin(ssid, password);
+    
+    while (WiFi.status() != WL_CONNECTED) {
+      delay(250);
+      Serial.print(".");
+    }  
+    Serial.println();
 }
 
 bool sendMeasurement(Measurement * msr, size_t memSize){
@@ -70,6 +51,7 @@ bool sendMeasurement(Measurement * msr, size_t memSize){
   
     String payload;
     json.printTo(payload);
+    Serial.println(payload);
     
     int httpCode = client.POST(payload);
     Serial.println("Request sent");

@@ -8,8 +8,8 @@
 SoftwareSerial swSer(14, 12, false, 256);
 Timer timer;
 
-#define DHT_PIN 0
-#define READ_CYCLE 1000
+#define DHT_PIN 4
+#define READ_CYCLE 5000
 
 dht DHT;
 
@@ -40,15 +40,11 @@ void setup() {
   //initializePMS();
   readContext();
   initializeSensor();
-  initializeRestCtrl();
+  initClient();
 }
 
 void loop() {
   serialLoop();
   //pmsLoop();
-  timer.update();
-  MeasurementData data = readTemp();
-  Measurement measurement = {"v1",{"ABC1234","0.0.1","DHT11"},data};
-  bool sendStatus = sendMeasurement(measurement);
-  
+  timer.update();  
 }

@@ -3,16 +3,16 @@ void initializeSensor() {
   timer.every(READ_CYCLE, readAndSend);
 }
 
-MeasurementData readTemp() {
+MeasurementData readTemp() {  
   int chk = DHT.read11(DHT_PIN);
   MeasurementData values = {0.0, 0.0, 0.0, 0.0, 0.0};
-  if (chk == DHTLIB_OK) {
+  if (chk == DHTLIB_OK) {    
     values.temp = DHT.temperature;
     values.humidity = DHT.humidity;
-    values.dew = dewPointFast(values.temp, values.hum);
+    values.preassure = dewPointFast(values.temp, values.humidity);
   }
   else
-  {
+  {  
     Serial.println(chk);
   }
   return values;
@@ -29,11 +29,11 @@ double dewPointFast(double celsius, double humidity)
 
 
 void readAndSend() {
-  MeasurementData values = readTemp();
-  Serial.print("DATA:");
-  Serial.print(values.temp);
-  Serial.print(";");
-  Serial.print(values.humidity);
-  Serial.print(";");
-  Serial.println(values.preassure);
+  MeasurementData data = readTemp();
+  
+  Measurement measurement = {"v1",{"ABC1234","0.0.1","DHT11"},data};
+  bool msrSent = sendMeasurement(&measurement, sizeof(measurement));
+  if(!msrSent){
+    Serial.println("Could not sent measurement");
+  }
 }
