@@ -3,15 +3,11 @@
 #include <ESP8266HTTPClient.h>
 #include <SoftwareSerial.h>
 #include "Timer.h"
-#include "dht.h"
+
+#define READ_CYCLE 5000
 
 SoftwareSerial swSer(14, 12, false, 256);
 Timer timer;
-
-#define DHT_PIN 4
-#define READ_CYCLE 5000
-
-dht DHT;
 
 char serialInput[100];
 
@@ -24,7 +20,7 @@ struct MeasurementId {
 struct MeasurementData {
     float temp;
     float humidity;
-    float preassure;
+    float pressure;
     float pm25;
     float pm10;  
 };
@@ -39,7 +35,7 @@ void setup() {
   initializeSerial();
   //initializePMS();
   readContext();
-  initializeSensor();
+  initializeSensors();
   initClient();
 }
 

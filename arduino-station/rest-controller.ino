@@ -7,9 +7,10 @@ const char* password = "";
 const char* gatewayUrl = "http://172.20.10.2:3000/data";
 
 void initClient() {
-    Serial.begin(115200);
+
     Serial.print("Connecting to ");
     Serial.println(ssid);
+    
     Serial.flush();
     
     WiFi.mode(WIFI_STA);
@@ -43,7 +44,7 @@ bool sendMeasurement(Measurement * msr, size_t memSize){
     JsonObject& dataField = json.createNestedObject("data");
     dataField["temp"] = msr->data.temp;
     dataField["humidity"] = msr->data.humidity;
-    dataField["preassure"] = msr->data.preassure;
+    dataField["pressure"] = msr->data.pressure;
     dataField["pm25"] = msr->data.pm25;
     dataField["pm10"] = msr->data.pm10;  
   
