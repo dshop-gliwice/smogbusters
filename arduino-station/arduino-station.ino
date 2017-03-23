@@ -1,5 +1,6 @@
 #include <EEPROM.h>
 #include <ESP8266WiFi.h>
+#include <ESP8266HTTPClient.h>
 #include <SoftwareSerial.h>
 #include "Timer.h"
 #include "dht.h"
@@ -11,24 +12,43 @@ Timer timer;
 #define READ_CYCLE 1000
 
 dht DHT;
-WiFiServer server(80);
 
 char serialInput[100];
 
+struct MeasurementId {
+    char uuid[20];
+    char firmware [10];
+    char sensors [10];      
+};
+
+struct MeasurementData {
+    float temp;
+    float humidity;
+    float preassure;
+    float pm25;
+    float pm10;  
+};
 struct Measurement {
-  double temp; double hum; double dew;
+    char version [5];
+    struct MeasurementId id;
+    struct MeasurementData data;
 };
 
 void setup() {
   EEPROM.begin(512);
   initializeSerial();
-  initializePMS();
+  //initializePMS();
   readContext();
   initializeSensor();
+  initializeRestCtrl();
 }
 
 void loop() {
   serialLoop();
-  pmsLoop();
+  //pmsLoop();
   timer.update();
+  MeasurementData data = readTemp();
+  Measurement measurement = {"v1",{"ABC1234","0.0.1","DHT11"},data};
+  bool sendStatus = sendMeasurement(measurement);
+  
 }

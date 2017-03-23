@@ -3,12 +3,12 @@ void initializeSensor() {
   timer.every(READ_CYCLE, readAndSend);
 }
 
-Measurement readTemp() {
+MeasurementData readTemp() {
   int chk = DHT.read11(DHT_PIN);
-  Measurement values = {0.0, 0.0, 0.0};
+  MeasurementData values = {0.0, 0.0, 0.0, 0.0, 0.0};
   if (chk == DHTLIB_OK) {
     values.temp = DHT.temperature;
-    values.hum = DHT.humidity;
+    values.humidity = DHT.humidity;
     values.dew = dewPointFast(values.temp, values.hum);
   }
   else
@@ -29,11 +29,11 @@ double dewPointFast(double celsius, double humidity)
 
 
 void readAndSend() {
-  Measurement values = readTemp();
+  MeasurementData values = readTemp();
   Serial.print("DATA:");
   Serial.print(values.temp);
   Serial.print(";");
-  Serial.print(values.hum);
+  Serial.print(values.humidity);
   Serial.print(";");
-  Serial.println(values.dew);
+  Serial.println(values.preassure);
 }
