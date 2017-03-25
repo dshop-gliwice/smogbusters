@@ -22,7 +22,7 @@ void initializeBME() {
 
 MeasurementData readMeasurementFromBME() {
 
-  MeasurementData data = {0.0, 0.0, 0.0, 0.0, 0.0};
+  MeasurementData data = {0.0, 0.0, 0.0, 0, 0};
 
   data.temp = sensor.readTempC(); //celsius
   data.pressure = sensor.readFloatPressure() / 100; //hPa

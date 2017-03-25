@@ -21,8 +21,8 @@ struct MeasurementData {
     float temp;
     float humidity;
     float pressure;
-    float pm25;
-    float pm10;  
+    int pm25;
+    int pm10;  
 };
 struct Measurement {
     char version [5];
@@ -30,10 +30,15 @@ struct Measurement {
     struct MeasurementData data;
 };
 
+struct PmsData {
+    int pm1;
+    int pm25;
+    int pm10;  
+};
+
 void setup() {
   EEPROM.begin(512);
   initializeSerial();
-  //initializePMS();
   readContext();
   initializeSensors();
   initClient();
@@ -41,6 +46,5 @@ void setup() {
 
 void loop() {
   serialLoop();
-  //pmsLoop();
   timer.update();  
 }
