@@ -4,10 +4,14 @@
 
 const char* ssid = "set_me";
 const char* password = ""; 
-const char* gatewayUrl = "http://172.20.10.2:3000/data";
+const char* gatewayUrl = "http://35.156.69.56:8080/api/measurement";
+
 
 void initClient() {
-
+    Serial.println();
+    Serial.print("MAC: ");
+    Serial.println(WiFi.macAddress());
+    
     Serial.print("Connecting to ");
     Serial.println(ssid);
     
@@ -20,10 +24,14 @@ void initClient() {
       delay(250);
       Serial.print(".");
     }  
-    Serial.println();
+    Serial.println("WIFI connected");
+    Serial.print("IP address: ");
+    Serial.println(WiFi.localIP());
 }
-
+unsigned long cnt = 0;
+unsigned long cntFailed = 0;
 bool sendMeasurement(Measurement * msr, size_t memSize){
+    cnt++;
     if(WiFi.status() != WL_CONNECTED){
       return false;
     }
@@ -46,7 +54,11 @@ bool sendMeasurement(Measurement * msr, size_t memSize){
     dataField["humidity"] = msr->data.humidity;
     dataField["pressure"] = msr->data.pressure;
     dataField["pm25"] = msr->data.pm25;
-    dataField["pm10"] = msr->data.pm10;  
+    dataField["pm10"] = msr->data.pm10;
+    dataField["free_heap"] = ESP.getFreeHeap();
+    dataField["cnt"] = cnt;
+    dataField["cnt_failed"] = cntFailed;
+
   
     String payload;
     json.printTo(payload);
@@ -56,8 +68,14 @@ bool sendMeasurement(Measurement * msr, size_t memSize){
     Serial.println("Request sent");
     if (httpCode != HTTP_CODE_OK) {
       Serial.printf("Request failed, error: %s\n", client.errorToString(httpCode).c_str());
+      cntFailed++;
+      if (cntFailed > 10) {
+        ESP.restart();
+      }
       return false;
-    } 
+    }
+    cntFailed=0;
+    
     
     Serial.flush();
     client.end();  
