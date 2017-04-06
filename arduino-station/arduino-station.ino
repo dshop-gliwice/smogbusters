@@ -23,7 +23,8 @@ struct MeasurementData {
     float humidity;
     float pressure;
     int pm25;
-    int pm10;  
+    int pm10;
+    int pm1;
 };
 
 struct Measurement {
