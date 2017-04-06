@@ -2,7 +2,7 @@
 #include <ESP8266HTTPClient.h>
 #include <ArduinoJson.h>
 
-const char* ssid = "set_me";
+const char* ssid = "set-me";
 const char* password = ""; 
 const char* gatewayUrl = "http://35.156.69.56:8080/api/measurement";
 
@@ -55,6 +55,7 @@ bool sendMeasurement(Measurement * msr, size_t memSize){
     dataField["pressure"] = msr->data.pressure;
     dataField["pm25"] = msr->data.pm25;
     dataField["pm10"] = msr->data.pm10;
+    dataField["pm1"] = msr->data.pm1;
     dataField["free_heap"] = ESP.getFreeHeap();
     dataField["cnt"] = cnt;
     dataField["cnt_failed"] = cntFailed;
