@@ -5,6 +5,7 @@
 #include "Timer.h"
 
 #define READ_CYCLE 5000
+#define UUID_LENGTH 25
 
 SoftwareSerial swSer(14, 12, false, 256);
 Timer timer;
@@ -12,7 +13,7 @@ Timer timer;
 char serialInput[100];
 
 struct MeasurementId {
-    char uuid[20];
+    char uuid[UUID_LENGTH];
     char firmware [10];
     char sensors [10];      
 };
@@ -24,6 +25,7 @@ struct MeasurementData {
     int pm25;
     int pm10;  
 };
+
 struct Measurement {
     char version [5];
     struct MeasurementId id;
@@ -37,9 +39,10 @@ struct PmsData {
 };
 
 void setup() {
+  randomSeed(analogRead(0));
   EEPROM.begin(512);
   initializeSerial();
-  readContext();
+  checkContext();
   initializeSensors();
   initClient();
 }

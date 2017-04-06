@@ -1,5 +1,6 @@
 void initializeSerial() {
   Serial.begin(115200);
+  Serial.println();
   Serial.setTimeout(2000);
   Serial.flush();
 
