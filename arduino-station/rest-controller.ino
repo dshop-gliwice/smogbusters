@@ -56,6 +56,7 @@ bool sendMeasurement(Measurement * msr, size_t memSize){
     dataField["pm25"] = msr->data.pm25;
     dataField["pm10"] = msr->data.pm10;
     dataField["pm1"] = msr->data.pm1;
+    dataField["DStemp"] = msr->data.DStemp;
     dataField["free_heap"] = ESP.getFreeHeap();
     dataField["cnt"] = cnt;
     dataField["cnt_failed"] = cntFailed;

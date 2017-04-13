@@ -4,6 +4,7 @@
 #include <SoftwareSerial.h>
 #include "Timer.h"
 
+
 #define READ_CYCLE 5000
 #define UUID_LENGTH 25
 
@@ -25,6 +26,7 @@ struct MeasurementData {
     int pm25;
     int pm10;
     int pm1;
+    float DStemp;
 };
 
 struct Measurement {
