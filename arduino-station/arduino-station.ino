@@ -46,6 +46,7 @@ void setup() {
   EEPROM.begin(512);
   initializeSerial();
   checkContext();
+  initializeHeater();
   initializeSensors();
   initClient();
 }
