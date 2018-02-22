@@ -4,6 +4,11 @@ Air monitoring project
 * NodeMCU
   * https://www.aliexpress.com/item/1PCS-New-Wireless-Module-NodeMcu-Lua-WIFI-Internet-of-Things-development-board-based-ESP8266-with-pcb/32786565171.html
   * https://botland.com.pl/moduly-wifi/4450-modul-wifi-esp8266-nodemcu-v2-4mb.html
+  * https://kamami.pl/moduly-wifi/559667-modul-z-esp8266-nodemcu.html
+
+
+* Case
+  * https://maszczyk.pl/pokaz_produkt/obudowy-hermetyczne-z-74.html
 
 
 * Mosfet IRLZ44N
@@ -36,14 +41,17 @@ Air monitoring project
 * BME280
   * https://www.aliexpress.com/item/BME280-Digital-Sensor-Temperature-Humidity-Barometric-Pressure-Sensor-Breakout-Module-BME280-I2C-SPI-1-8-5V/32835514108.html
   * https://botland.com.pl/czujniki-temperatury/165-czujnik-temperatury-ds18b20-cyfrowy-1-wire-tht.html
+  * https://kamami.pl/czujniki-temperatury/565661-bme280-czujnik-temperatury-wilgotnosci-oraz-barometr-modul-gravity-sen0236.html
 
 
 * DS18B20
   * https://www.aliexpress.com/item/new-and-original-DS18B20-18B20-TO-92-3-Digital-Thermometer-Sensor/32716051460.html
+  * https://kamami.pl/temperatury/138578-ds18b20.html
 
 
 * PLANTOWER Laser DUST SENSOR PMS7003  
   * https://www.aliexpress.com/item/PLANTOWER-Laser-PM2-5-DUST-SENSOR-PMS7003-G7-High-precision-laser-dust-concentration-sensor-digital-dust/32639894148.html
+  * https://kamami.pl/czujniki-gazow/564008-plantower-pms7003-laserowy-czujnik-pylu-pm25.html
 
 * IDC adapter
   * https://kamami.pl/zlacza-inne/564553-adapter-idc10-127mm-na-zlacze-254mm-dla-czujnika-pms7003.html
