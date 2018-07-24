@@ -8,13 +8,13 @@ module screwMount(){
            d = 6.3,
            center = false);
       cylinder(h = sHeight-1.3,
-           d = 3.15,
+           d = 3.4,
            center = false);
   } 
 }
 
 module spacer(){
-    cube([4.5,4,sHeight-1.5],false);  
+    cube([5.5,4,sHeight-1.5],false);  
 }
 
 module screwMountFill(){
@@ -39,9 +39,9 @@ module main(){
     screwMountFill();
     
    //back spacers
-   translate([2,21,0])
+   translate([1.2,21,0])
     spacer();
-   translate([19.5,21,0])
+   translate([19,21,0])
     spacer();
     
    //front wall
