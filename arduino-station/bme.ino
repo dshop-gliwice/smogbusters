@@ -6,7 +6,7 @@ BME280 sensor;
 void initializeBME() {
 
   sensor.settings.commInterface = I2C_MODE;
-  sensor.settings.I2CAddress = 0x76;
+  sensor.settings.I2CAddress = 0x77;
   sensor.settings.runMode = 3;
   sensor.settings.tStandby = 0;
   sensor.settings.filter = 0;

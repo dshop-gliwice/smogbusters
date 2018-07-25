@@ -5,13 +5,10 @@ int PM01Value = 0;        //define PM1.0 value of the air detector module
 int PM2_5Value = 0;       //define PM2.5 value of the air detector module
 int PM10Value = 0;       //define PM10 value of the air detector module
 
-
-
 void initializePMS() {
   swSer.begin(9600);
   swSer.setTimeout(1500);
 }
-
 
 PmsData pmsLoop() {
   if (swSer.find(0x42)) {  //start to read when detect 0x42
