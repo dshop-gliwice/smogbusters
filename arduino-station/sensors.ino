@@ -20,8 +20,11 @@ void readAndSend() {
   Measurement measurement = {"1", {"uuid", "0.0.1", "BME280"}, data};
   memcpy( measurement.id.uuid, ctx.deviceID, UUID_LENGTH*sizeof(char));
   bool msrSent = sendMeasurement(&measurement, sizeof(measurement));
-  
-  if (!msrSent) {
-    Serial.println("Could not sent measurement");
+  blinkStatusLed();
+  if (msrSent) {
+    enableStatusLed();
+  }else{
+    disableStatusLed();
+    Serial.println("Could not send the measurement");
   }
 }
