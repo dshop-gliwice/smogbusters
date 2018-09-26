@@ -17,12 +17,13 @@ bool initializeDS() {
   if(sensorConnected) {
     dsSensor.setResolution(dsThermometer, 10);
     dsSensor.setWaitForConversion(false);
+
+    readDS1820();
   }
   Serial.print("DS ");
   Serial.println(sensorConnected);
   return sensorConnected;
 }
-
 
 void requestDS1820() {
   dsSensor.requestTemperaturesByAddress(dsThermometer);

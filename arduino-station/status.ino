@@ -1,19 +1,19 @@
 #define STATUS_PIN D3
 
-void initializeStatusLed(){
+void initializeStatusLed() {
   pinMode(STATUS_PIN, OUTPUT);
   disableStatusLed();
 }
 
-void enableStatusLed(){
+void enableStatusLed() {
   digitalWrite(STATUS_PIN, LOW);
 }
 
-void disableStatusLed(){
+void disableStatusLed() {
   digitalWrite(STATUS_PIN, HIGH);
 }
 
-void blinkStatusLed(){
+void blinkStatusLed() {
     disableStatusLed();
     delay(250);
     enableStatusLed();
@@ -21,8 +21,8 @@ void blinkStatusLed(){
     disableStatusLed();
 }
 
-void testStatusLed(){
-  while (true){
+void testStatusLed() {
+  while (true) {
     enableStatusLed();
     delay(500);
     disableStatusLed();
