@@ -10,7 +10,7 @@ void initializeSensors() {
 }
 
 void readAndSend() {
-  
+  sendCount++;
   MeasurementData data = readMeasurementFromBME();
   PmsData pmsData = pmsLoop();
   data.pm25 = pmsData.pm25;
@@ -20,11 +20,23 @@ void readAndSend() {
   Measurement measurement = {"1", {"uuid", "0.0.1", "BME280"}, data};
   memcpy( measurement.id.uuid, ctx.deviceID, UUID_LENGTH*sizeof(char));
   bool msrSent = sendMeasurement(&measurement, sizeof(measurement));
+  if (!msrSent) {
+    Serial.println("Could not send the measurement");
+    sendCountFailed++;
+    if (sendCountFailed > 9) {
+      disableStatusLed();
+      ESP.restart();
+     }
+  }else{
+    sendCountFailed=0;
+  }
+  
+  updateLCD(&measurement);
+  
   blinkStatusLed();
   if (msrSent) {
     enableStatusLed();
   }else{
     disableStatusLed();
-    Serial.println("Could not send the measurement");
   }
 }

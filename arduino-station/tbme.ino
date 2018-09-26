@@ -6,7 +6,9 @@ BME280 sensor;
 void initializeBME() {
 
   sensor.settings.commInterface = I2C_MODE;
-  sensor.settings.I2CAddress = 0x77;
+  //sensor.settings.I2CAddress = 0x77; //119
+  //sensor.settings.I2CAddress = 0x76; //118
+  sensor.settings.I2CAddress = ctx.bmeI2CAddress;
   sensor.settings.runMode = 3;
   sensor.settings.tStandby = 0;
   sensor.settings.filter = 0;
@@ -22,7 +24,7 @@ void initializeBME() {
 
 MeasurementData readMeasurementFromBME() {
 
-  MeasurementData data = {0.0, 0.0, 0.0, 0, 0};
+  MeasurementData data = {0.0, 0.0, 0.0, 0, 0, 0, 0.0};
 
   data.temp = sensor.readTempC(); //celsius
   data.pressure = sensor.readFloatPressure() / 100; //hPa

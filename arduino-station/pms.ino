@@ -1,3 +1,7 @@
+#include <SoftwareSerial.h>
+SoftwareSerial swSer(14, 12, false, 256);
+
+
 #define LENG 31   //0x42 + 31 bytes equal to 32 bytes
 unsigned char buf[LENG];
 
@@ -21,25 +25,6 @@ PmsData pmsLoop() {
         PM10Value = transmitPM10(buf); //count PM10 value of the air detector module
       }
     }
-  }
-
-  static unsigned long OledTimer = millis();
-  if (millis() - OledTimer >= 1000)
-  {
-    OledTimer = millis();
-
-    Serial.print("PM1.0: ");
-    Serial.print(PM01Value);
-    Serial.println("  ug/m3");
-
-    Serial.print("PM2.5: ");
-    Serial.print(PM2_5Value);
-    Serial.println("  ug/m3");
-
-    Serial.print("PM1 0: ");
-    Serial.print(PM10Value);
-    Serial.println("  ug/m3");
-    Serial.println();
   }
 
   PmsData data = {PM01Value, PM2_5Value, PM10Value};
