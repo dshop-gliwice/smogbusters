@@ -5,7 +5,7 @@ sHeight=7.2;
 module screwMount(){
   difference(){
       cylinder(h = sHeight-1.5,
-           d = 6.3,
+           d = 6.3  ,
            center = false);
       cylinder(h = sHeight-1.3,
            d = 3.4,
