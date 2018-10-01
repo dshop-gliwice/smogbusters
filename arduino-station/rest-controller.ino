@@ -2,13 +2,15 @@
 #include <ESP8266HTTPClient.h>
 #include <ArduinoJson.h>
 
-const char* gatewayUrl = "http://35.156.69.56:8080/api/measurement";
+const char* gatewayUrl = "http://api.smogbusters.org:8080/api/measurement";
 
 unsigned long sendCount = 0;
 unsigned long sendCountFailed = 0;
 
 void initClient() {
     Serial.println();
+    Serial.print("Gateway url: ");
+    Serial.println(gatewayUrl);
     Serial.print("MAC: ");
     Serial.println(WiFi.macAddress());
 
