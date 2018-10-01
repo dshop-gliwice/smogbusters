@@ -17,7 +17,7 @@ void readAndSend() {
   data.pm10 = pmsData.pm10;
   data.pm1 = pmsData.pm1;
   data.DStemp = DStemp;
-  Measurement measurement = {"1", {"uuid", "0.0.1", "BME280"}, data};
+  Measurement measurement = {"1", {"uuid", FW_VERSION, "BME280"}, data};
   memcpy( measurement.id.uuid, ctx.deviceID, UUID_LENGTH*sizeof(char));
   bool msrSent = sendMeasurement(&measurement, sizeof(measurement));
   if (!msrSent) {
