@@ -40,6 +40,14 @@ void initializeLCD() {
   lcd.createChar (0, smiley);    // load smiley to memory 0
   lcd.createChar (1, sadface);    // load sadface to memory 0
   lcd.setBacklight(HIGH);
+  //**************************
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcdPrintCenter("Version");
+  lcd.setCursor(0, 1);
+  lcdPrintCenter(FW_VERSION);
+  delay(1000);
+  //**************************
   lcd.clear();
   lcd.setCursor(0, 0);
   lcdPrintCenter("SMOGBUSTERS.ORG");
