@@ -1,9 +1,11 @@
+#include "PMS.h"
 #include <SoftwareSerial.h>
 SoftwareSerial swSer(14, 12, false, 256);
+PMS pms(swSer);
+PMS::DATA rawData;
 
-
-#define LENG 31   //0x42 + 31 bytes equal to 32 bytes
-unsigned char buf[LENG];
+//#define LENG 31   //0x42 + 31 bytes equal to 32 bytes
+//unsigned char buf[LENG];
 
 int PM01Value = 0;        //define PM1.0 value of the air detector module
 int PM2_5Value = 0;       //define PM2.5 value of the air detector module
@@ -11,64 +13,11 @@ int PM10Value = 0;       //define PM10 value of the air detector module
 
 void initializePMS() {
   swSer.begin(9600);
-  swSer.setTimeout(1500);
+  swSer.setTimeout(2000);
 }
 
 PmsData pmsLoop() {
-  if (swSer.find(0x42)) {  //start to read when detect 0x42
-    swSer.readBytes(buf, LENG);
-
-    if (buf[0] == 0x4d) {
-      if (checkValue(buf, LENG)) {
-        PM01Value = transmitPM01(buf); //count PM1.0 value of the air detector module
-        PM2_5Value = transmitPM2_5(buf); //count PM2.5 value of the air detector module
-        PM10Value = transmitPM10(buf); //count PM10 value of the air detector module
-      }
-    }
-  }
-
-  PmsData data = {PM01Value, PM2_5Value, PM10Value};
+  pms.readUntil(rawData, 2000);
+  PmsData data = {rawData.PM_AE_UG_1_0, rawData.PM_AE_UG_2_5, rawData.PM_AE_UG_10_0};
   return data;
-}
-
-
-char checkValue(unsigned char *thebuf, char leng)
-{
-  char receiveflag = 0;
-  int receiveSum = 0;
-
-  for (int i = 0; i < (leng - 2); i++) {
-    receiveSum = receiveSum + thebuf[i];
-  }
-  receiveSum = receiveSum + 0x42;
-
-  if (receiveSum == ((thebuf[leng - 2] << 8) + thebuf[leng - 1])) //check the serial data
-  {
-    receiveSum = 0;
-    receiveflag = 1;
-  }
-  return receiveflag;
-}
-
-int transmitPM01(unsigned char *thebuf)
-{
-  int PM01Val;
-  PM01Val = ((thebuf[3] << 8) + thebuf[4]); //count PM1.0 value of the air detector module
-  return PM01Val;
-}
-
-//transmit PM Value to PC
-int transmitPM2_5(unsigned char *thebuf)
-{
-  int PM2_5Val;
-  PM2_5Val = ((thebuf[5] << 8) + thebuf[6]); //count PM2.5 value of the air detector module
-  return PM2_5Val;
-}
-
-//transmit PM Value to PC
-int transmitPM10(unsigned char *thebuf)
-{
-  int PM10Val;
-  PM10Val = ((thebuf[7] << 8) + thebuf[8]); //count PM10 value of the air detector module
-  return PM10Val;
 }

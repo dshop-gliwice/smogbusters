@@ -2,6 +2,7 @@
 
 #define HEATER_POWER      500 // in mW
 #define HEATER_RESISTANCE 18 // in ohms
+#define HEATER_VOLTAGE    5
 
 int heaterState = 0;
 
@@ -24,7 +25,7 @@ int getHeaterState() {
 void updateHeater(Measurement * msr) {
   char msg[10];
 
-  int heaterFullPower = 1000 * ctx.voltage * ctx.voltage / HEATER_RESISTANCE; // heater power when powered at 100% PWM
+  int heaterFullPower = 1000 * HEATER_VOLTAGE * HEATER_VOLTAGE / HEATER_RESISTANCE; // heater power when powered at 100% PWM
   int heaterPWMPower = 1023 * HEATER_POWER / heaterFullPower;                 // PWM duty cycle to reach HEATER_POWER power
 
   int heatPwr = constrain(map(msr->data.humidity, 50, 90, 0, heaterPWMPower), 0, heaterPWMPower);
