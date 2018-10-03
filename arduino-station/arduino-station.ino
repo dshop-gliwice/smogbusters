@@ -7,13 +7,12 @@
 #define READ_CYCLE 5000
 
 #define UUID_LENGTH 25
-#define FW_VERSION "18.10.01-c"
+#define FW_VERSION "18.10.01-d"
 
 Timer timer;
 
 struct MeasurementId {
   char uuid[UUID_LENGTH];
-  char firmware [15];
   char sensors [10];      
 };
   
@@ -25,6 +24,7 @@ struct MeasurementData {
   int pm10;
   int pm1;
   float DStemp;
+  char firmware [15];
 };
 
 struct Measurement {
