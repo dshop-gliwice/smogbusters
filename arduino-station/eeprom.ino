@@ -9,10 +9,11 @@ struct {
   char wifiSSID[32];
   char wifiPasswd[32];
   unsigned int bmeI2CAddress;
-} ctx = {CONFIG_VERSION, "newID", "-", "-", 0x77};
+  unsigned int heaterVoltage;
+} ctx = {CONFIG_VERSION, "newID", "-", "-", 0x77, 12};
 
 void checkContext() {
-  if (! readContext()){
+  if (! readContext()) {
     Serial.println("Generating new deviceID");
     String id;
     generateUUID(id);
@@ -30,12 +31,14 @@ void checkContext() {
     saveContext();
   }
 
-  char info[100]; memset(info, '\0', sizeof(info));
+  ctx.heaterVoltage = constrain(ctx.heaterVoltage, 5, 12);
+
+  char info[150]; memset(info, '\0', sizeof(info));
   contextToStr(info);
   Serial.println(info);
 }
 
-void contextToStr(char *answer){
+void contextToStr(char *answer) {
   char append[4];
   
   strcat(answer, "\n>DeviceID: '");
@@ -46,6 +49,9 @@ void contextToStr(char *answer){
   strcat(answer, ctx.wifiPasswd);
   strcat(answer, "'\n>BmeI2CAddress : '");
   sprintf(append,"%u", ctx.bmeI2CAddress);
+  strcat(answer, append);
+  strcat(answer, "'\n>HeaterVoltage : '");
+  sprintf(append,"%u", ctx.heaterVoltage);
   strcat(answer, append);
   strcat(answer, "'");
 }
@@ -88,7 +94,7 @@ void generateUUID(String &uuid){
   uuid = mac + randStr;
 }
 
-bool findEOS(char *a, int arraySize){
+bool findEOS(char *a, int arraySize) {
   for (int i=0; i<arraySize; i++) {
     if (a[i] == '\0') {
       return true;
