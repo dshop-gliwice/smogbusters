@@ -32,6 +32,7 @@ void readAndSend() {
   }
   
   updateLCD(&measurement);
+  updateHeater(&measurement);
   
   blinkStatusLed();
   if (msrSent) {

@@ -40,7 +40,7 @@ void serialCommand(char *command) {
       contextToStr(answer);
       break;
     case 'I': //set device ID
-      memset(ctx.deviceID, '\0', sizeof(ctx.deviceID));
+      memset(ctx.deviceID, '\0', sizeof(ctx.deviceID)); 
       strcat(ctx.deviceID, param);
       contextToStr(answer);
       saveContext();
@@ -59,11 +59,6 @@ void serialCommand(char *command) {
       break;
     case 'B': //set BME i2c address
       ctx.bmeI2CAddress = atoi(param);
-      contextToStr(answer);
-      saveContext();
-      break;
-    case 'V': //set heater voltage
-      ctx.voltage = atoi(param);
       contextToStr(answer);
       saveContext();
       break;
