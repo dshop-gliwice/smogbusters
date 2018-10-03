@@ -5,13 +5,15 @@
 
 
 #define READ_CYCLE 5000
+
 #define UUID_LENGTH 25
+#define FW_VERSION "18.10.01-c"
 
 Timer timer;
 
 struct MeasurementId {
   char uuid[UUID_LENGTH];
-  char firmware [10];
+  char firmware [15];
   char sensors [10];      
 };
   
@@ -47,6 +49,7 @@ void setup() {
   initializeSensors();
   initializeLCD();
   initClient();
+  initOTA();
 }
 
 void loop() {

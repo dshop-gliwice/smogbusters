@@ -13,6 +13,8 @@ void initClient() {
     Serial.println(gatewayUrl);
     Serial.print("MAC: ");
     Serial.println(WiFi.macAddress());
+    Serial.print("FW version: ");
+    Serial.println(FW_VERSION);
 
     Serial.print("Connecting to ");
     Serial.println(ctx.wifiSSID);

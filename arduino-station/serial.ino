@@ -67,7 +67,9 @@ void serialCommand(char *command) {
       contextToStr(answer);
       saveContext();
       break;
-
+    case 'U': //OTA update
+      otaUpdate();
+      break;
     default:  strcat(answer, "Command unknown");
   }
 
