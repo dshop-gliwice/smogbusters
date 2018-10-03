@@ -50,7 +50,6 @@ bool sendMeasurement(Measurement * msr, size_t memSize) {
 
     JsonObject& idField = json.createNestedObject("id");
     idField["uuid"] = msr->id.uuid;
-    idField["firmware"] = msr->id.firmware;
     idField["sensors"] = msr->id.sensors;
 
     JsonObject& dataField = json.createNestedObject("data");
@@ -65,6 +64,8 @@ bool sendMeasurement(Measurement * msr, size_t memSize) {
     dataField["cnt"] = sendCount;
     dataField["cnt_failed"] = sendCountFailed;
     dataField["heater_state"] = getHeaterState();
+    dataField["firmware"] = msr->data.firmware;
+
     String payload;
     json.printTo(payload);
     Serial.println(payload);

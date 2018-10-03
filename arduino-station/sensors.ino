@@ -13,11 +13,12 @@ void readAndSend() {
   sendCount++;
   MeasurementData data = readMeasurementFromBME();
   PmsData pmsData = pmsLoop();
+  strcpy(data.firmware, FW_VERSION);
   data.pm25 = pmsData.pm25;
   data.pm10 = pmsData.pm10;
   data.pm1 = pmsData.pm1;
   data.DStemp = DStemp;
-  Measurement measurement = {"1", {"uuid", FW_VERSION, "BME280"}, data};
+  Measurement measurement = {"1", {"uuid", "BME280"}, data};
   memcpy( measurement.id.uuid, ctx.deviceID, UUID_LENGTH*sizeof(char));
   bool msrSent = sendMeasurement(&measurement, sizeof(measurement));
   if (!msrSent) {
