@@ -45,7 +45,7 @@ void setup() {
   initializeSerial();
   checkContext();
   initializeStatusLed();
-  //initializeHeater();
+  initializeHeater();
   initializeSensors();
   initializeLCD();
   initClient();

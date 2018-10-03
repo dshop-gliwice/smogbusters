@@ -27,7 +27,7 @@ void readSerial() {
 
 void serialCommand(char *command) {
   char param[50]; memset(param, '\0', sizeof(param));
-  char answer[100]; memset(answer, '\0', sizeof(answer));
+  char answer[150]; memset(answer, '\0', sizeof(answer));
   byte commandLen = strlen(command);
   if (commandLen > 2) {
     strncpy(param, command + 2, commandLen - 2);
@@ -59,6 +59,11 @@ void serialCommand(char *command) {
       break;
     case 'B': //set BME i2c address
       ctx.bmeI2CAddress = atoi(param);
+      contextToStr(answer);
+      saveContext();
+      break;
+    case 'H': //set heater voltage
+      ctx.heaterVoltage = atoi(param);
       contextToStr(answer);
       saveContext();
       break;
