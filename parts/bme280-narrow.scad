@@ -2,8 +2,8 @@ $fn=64;
 
 wHeight=4; //wall height
 wThick=2; //wall thickness
-bWidth=10.5; //board width
-bHeight=11.8; //board height
+bWidth=10.7; //board width
+bHeight=13.3; //board height
 
 module screwMount(){
   difference(){
