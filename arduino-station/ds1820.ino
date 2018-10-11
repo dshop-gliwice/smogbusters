@@ -20,7 +20,7 @@ bool initializeDS() {
 
     readDS1820();
   }
-  Serial.print("DS ");
+  Serial.print("DS18B20 state: ");
   Serial.println(sensorConnected);
   return sensorConnected;
 }

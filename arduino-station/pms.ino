@@ -14,7 +14,12 @@ void initializePMS() {
 }
 
 PmsData pmsLoop() {
-  pms.readUntil(rawData, 2000);
-  PmsData data = {rawData.PM_AE_UG_1_0, rawData.PM_AE_UG_2_5, rawData.PM_AE_UG_10_0};
+  PmsData data = {-1, -1, -1};
+  if (pms.readUntil(rawData, 1000)) {
+    data.pm1 = rawData.PM_AE_UG_1_0;
+    data.pm25 = rawData.PM_AE_UG_2_5;
+    data.pm10 = rawData.PM_AE_UG_10_0;
+  }
+  
   return data;
 }

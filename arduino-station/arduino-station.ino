@@ -4,10 +4,10 @@
 #include "Timer.h"
 
 
-#define READ_CYCLE 5000
+#define READ_CYCLE 10000
 
 #define UUID_LENGTH 25
-#define FW_VERSION "18.10.01-d"
+#define FW_VERSION "18.10.11-a"
 
 Timer timer;
 

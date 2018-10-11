@@ -2,6 +2,7 @@
 #include "Wire.h"
 
 BME280 sensor;
+bool bmeIsActive = false;
 
 void initializeBME() {
 
@@ -19,17 +20,23 @@ void initializeBME() {
   sensor.begin();
 
   //BME280 requires about 2 ms to start up.
-  delay(5);
+  delay(50);
+  if (sensor.readTempC() > -100){
+    bmeIsActive = true;
+  }
+  
+  Serial.print("BME280 state: ");
+  Serial.println(bmeIsActive);
 }
 
 MeasurementData readMeasurementFromBME() {
 
   MeasurementData data = {0.0, 0.0, 0.0, 0, 0, 0, 0.0};
-
-  data.temp = sensor.readTempC(); //celsius
-  data.pressure = sensor.readFloatPressure() / 100; //hPa
-  data.humidity = sensor.readFloatHumidity(); //%
-
+  if (bmeIsActive){
+    data.temp = sensor.readTempC(); //celsius
+    data.pressure = sensor.readFloatPressure() / 100; //hPa
+    data.humidity = sensor.readFloatHumidity(); //%
+  }
   return data;
 }
 

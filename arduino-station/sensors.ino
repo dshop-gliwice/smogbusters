@@ -1,6 +1,7 @@
 #define DS1820_INITDELAY 100
 
 void initializeSensors() {
+  delay(100);
   initializeBME();
   initializePMS();
   if(initializeDS()) {
@@ -26,6 +27,8 @@ void readAndSend() {
     sendCountFailed++;
     if (sendCountFailed > 9) {
       disableStatusLed();
+      Serial.println("Too many failed attempts. Rebooting");
+      delay(500);
       ESP.restart();
      }
   }else{

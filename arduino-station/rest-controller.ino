@@ -69,6 +69,7 @@ bool sendMeasurement(Measurement * msr, size_t memSize) {
     String payload;
     json.printTo(payload);
     Serial.println(payload);
+    Serial.flush();
     
     // Send data
     if(WiFi.status() != WL_CONNECTED){
@@ -86,7 +87,6 @@ bool sendMeasurement(Measurement * msr, size_t memSize) {
       return false;
     }
 
-    Serial.flush();
     client.end();
     return true;
 }
