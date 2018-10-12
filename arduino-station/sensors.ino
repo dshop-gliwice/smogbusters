@@ -34,7 +34,7 @@ void readAndSend() {
   }else{
     sendCountFailed=0;
   }
-  
+
   updateLCD(&measurement);
   updateHeater(&measurement);
   

@@ -36,6 +36,7 @@ void lcdPrintCenter(const char* data) {
 }
 
 void initializeLCD() {
+  if (ctx.lcdEnabled != 't') return;
   lcd.begin (20,4);
   lcd.createChar (0, smiley);    // load smiley to memory 0
   lcd.createChar (1, sadface);    // load sadface to memory 0
@@ -66,6 +67,7 @@ void clrLine(int n) {
 }
 
 void updateLCD(Measurement * msr) {
+  if (ctx.lcdEnabled != 't') return;
   char msg[10];
   
   lcd.setCursor(0, 0);

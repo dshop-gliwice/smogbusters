@@ -10,7 +10,8 @@ struct {
   char wifiPasswd[32];
   unsigned int bmeI2CAddress;
   unsigned int heaterVoltage;
-} ctx = {CONFIG_VERSION, "newID", "-", "-", 0x77, 12};
+  char lcdEnabled;
+} ctx = {CONFIG_VERSION, "newID", "-", "-", 0x77, 12, 'f'};
 
 void checkContext() {
   if (! readContext()) {
@@ -28,6 +29,16 @@ void checkContext() {
 
   if (! findEOS(ctx.wifiPasswd, 32)) {
     defaultWifiPassword.toCharArray(ctx.wifiPasswd, 32);
+    saveContext();
+  }
+
+  if (ctx.bmeI2CAddress != 0x76 && ctx.bmeI2CAddress != 0x77) {
+    ctx.bmeI2CAddress = 0x77;
+    saveContext();
+  }
+
+  if (ctx.lcdEnabled != 't' && ctx.lcdEnabled != 'f') {
+    ctx.lcdEnabled = 'f';
     saveContext();
   }
 
@@ -49,6 +60,9 @@ void contextToStr(char *answer) {
   strcat(answer, ctx.wifiPasswd);
   strcat(answer, "'\n>BmeI2CAddress : '");
   sprintf(append,"%u", ctx.bmeI2CAddress);
+  strcat(answer, append);
+  strcat(answer, "'\n>LCDEnabled : '");
+  sprintf(append,"%c", ctx.lcdEnabled);
   strcat(answer, append);
   strcat(answer, "'\n>HeaterVoltage : '");
   sprintf(append,"%u", ctx.heaterVoltage);

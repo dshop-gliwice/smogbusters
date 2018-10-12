@@ -10,7 +10,9 @@ void initializeSerial() {
 }
 
 void serialLoop() {
-  while (Serial.available() > 0) readSerial();
+  while (Serial.available() > 0) {
+    readSerial();
+  }
 }
 
 void readSerial() {
@@ -67,8 +69,20 @@ void serialCommand(char *command) {
       contextToStr(answer);
       saveContext();
       break;
+    case 'L': //disable/enable lcd
+      if (commandLen == 3) {
+        ctx.lcdEnabled = command[2];
+        contextToStr(answer);
+        saveContext();            
+      }
+      break;
     case 'U': //OTA update
       otaUpdate();
+      break;
+    case 'R': //Force reboot
+      Serial.println("Rebooting");
+      delay(500);
+      ESP.restart();
       break;
     default:  strcat(answer, "Command unknown");
   }

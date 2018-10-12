@@ -7,7 +7,7 @@ bool bmeIsActive = false;
 void initializeBME() {
 
   sensor.settings.commInterface = I2C_MODE;
-  //sensor.settings.I2CAddress = 0x77; //119
+  //sensor.settings.I2CAddress = 0x77; //119 //DFROBOT
   //sensor.settings.I2CAddress = 0x76; //118
   sensor.settings.I2CAddress = ctx.bmeI2CAddress;
   sensor.settings.runMode = 3;
