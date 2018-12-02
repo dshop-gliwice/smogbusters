@@ -73,10 +73,10 @@ module leftChannel(hollow) {
 
 module rightChannel(hollow) {
   union() {
-    translate([39, 49, 4.5])
+    translate([38, 49, 4.5])
       rotate(a=[180, 270, 270]) 
-        conector(9, 15.5, 12, 10, hollow, 1.5);
-    translate([39,52,6])
+        conector(9, 16, 12, 10, hollow, 1.5);
+    translate([38,52,6])
        color("blue") extension(12, 3);
   }
 }
@@ -84,11 +84,11 @@ module rightChannel(hollow) {
 module drillTemplate(shift) {
   translate([shift, 0 ,0])
     difference() {
-      cube([wThick*2+bWidth, 12, 0.5]); //front wall
+      cube([wThick*2+bWidth, 12, 1.25]); //front wall
       translate([11, 6, -0.1]) //left channel
-        cylinder(h=1, d=1);
-      translate([39, 6, -0.1]) //right channel
-        cylinder(h=1, d=1);
+        cylinder(h=2, d=1);
+      translate([38, 6, -0.1]) //right channel
+        cylinder(h=2, d=1);
     }
 }
 
