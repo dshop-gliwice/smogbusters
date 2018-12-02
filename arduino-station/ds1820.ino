@@ -1,8 +1,8 @@
 #include <OneWire.h>
 #include <DallasTemperature.h>
 
-#define DS1820_CYCLE 200
-#define DS1820_DELAY 100
+#define DS1820_CYCLE 1000
+#define DS1820_DELAY 500
 #define DS_PIN D7   //SSD3
 
 OneWire dsWire(DS_PIN);
@@ -15,7 +15,7 @@ bool initializeDS() {
   dsSensor.begin();
   bool sensorConnected = dsSensor.getAddress(dsThermometer, 0);
   if(sensorConnected) {
-    dsSensor.setResolution(dsThermometer, 10);
+    dsSensor.setResolution(dsThermometer, 11);
     dsSensor.setWaitForConversion(false);
 
     readDS1820();
@@ -34,4 +34,3 @@ void readDS1820() {
   DStemp = dsSensor.getTempC(dsThermometer);
   timer.after(DS1820_DELAY, requestDS1820);
 }
-
