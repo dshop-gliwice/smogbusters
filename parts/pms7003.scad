@@ -5,7 +5,7 @@ wThick=1.5; //wall thickness
 wThicCh=2.5;
 floorThick=1.25;
 bWidth=48; //board width
-bHeight=37.8; //board height
+bLength=37.8; //board height
 
 
 module conector(rectWidth, rectHeight, pipe, tall, hollow, shift){
@@ -37,7 +37,7 @@ module extension(diameter, thickness) {
 module box() {
   union() {
    //back wall
-   translate([0, wThick+bHeight, 0])
+   translate([0, wThick+bLength, 0])
      cube([wThick*2+bWidth, wThick, wHeight], false); 
    //front wall
    translate([0, 0, 0])
@@ -45,17 +45,17 @@ module box() {
 
    //side walls
    translate([0, 0, 0])
-     cube([wThick, wThick+bHeight+9, wHeight], false);    
+     cube([wThick, wThick+bLength+9, wHeight], false);    
    translate([wThick+bWidth, 0, 0])
-     cube([wThick, wThick+bHeight+9, wHeight], false);
+     cube([wThick, wThick+bLength+9, wHeight], false);
      
    //floor
    difference() {
      translate([0, 0, 0])
-       cube([bWidth+2*wThick, bHeight+2*wThick, floorThick], false);
+       cube([bWidth+2*wThick, bLength+2*wThick, floorThick], false);
      //hole
      holeSize=20;
-     translate([0, bHeight/2+wThick-holeSize/2, -0.01])
+     translate([0, bLength/2+wThick-holeSize/2, -0.01])
        cube([bWidth+2*wThick, holeSize, floorThick+0.1], false);
    }   
   }
