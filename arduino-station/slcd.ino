@@ -85,7 +85,7 @@ void updateLCD(Measurement * msr) {
   lcd.setCursor(0, 1);
   lcd.print("H: ");
   lcd.print(msr->data.humidity, 1);
-  lcd.print("%   ");
+  lcd.print("%    ");
 
   lcd.setCursor(12, 1);
   sprintf(msg, "2.5: %-3d", msr->data.pm25);
@@ -115,6 +115,5 @@ void updateLCD(Measurement * msr) {
   }else{
     lcd.print(char(0));
     lcd.print(sendCountFailed);
-  }
+  }  
 }
-

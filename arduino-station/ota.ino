@@ -12,7 +12,7 @@ void initOTA(){
 
 void otaUpdate() {
   Serial.println("OTA check");
-  t_httpUpdate_return ret = ESPhttpUpdate.update("ota.smogbusters.org", 8081, "/update.php", FW_VERSION);
+  t_httpUpdate_return ret = ESPhttpUpdate.update("ota.smogbusters.org", 80, "/update.php", FW_VERSION);
   switch(ret) {
     case HTTP_UPDATE_FAILED:
         Serial.println("[update] Update failed.");

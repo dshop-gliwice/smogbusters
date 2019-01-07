@@ -2,7 +2,7 @@
 #include <ESP8266HTTPClient.h>
 #include <ArduinoJson.h>
 
-const char* gatewayUrl = "http://api.smogbusters.org:8080/api/measurement";
+const char* gatewayUrl = "http://api.smogbusters.org/api/measurement";
 
 unsigned long sendCount = 0;
 unsigned long sendCountFailed = 0;

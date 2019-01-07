@@ -7,7 +7,7 @@
 #define READ_CYCLE 10000
 
 #define UUID_LENGTH 25
-#define FW_VERSION "18.11.18-a"
+#define FW_VERSION "18.12.03-a"
 
 Timer timer;
 
