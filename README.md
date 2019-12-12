@@ -6,4 +6,4 @@ Links:
  - charts: http://grafana.smogbusters.org/dashboard/db/measurements?refresh=10s&orgId=1
  - list of components: [bom.md](./docs/bom.md)
 
-![smogbusters-prototype](./docs/images/smogbuster-prototype-800px.png)
+![smogbusters-prototype](./docs/images/smogbuster-v2.0-800px.png)
